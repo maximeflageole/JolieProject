@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 940f797ea87b4f24496d91ad70c97e11, type: 3}
+  m_Name: TestAbility
+  m_EditorClassIdentifier: 
+  AbilityCooldown: 5
+  AbilityEffects:
+  - TargetType: 2
+    TargetRange: 1
+    AbilityEffectType: 0
+    Magnitude: 5
