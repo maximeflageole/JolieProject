@@ -27,7 +27,7 @@ namespace AbilitySystem
                     returnList.Add(instigator);
                     break;
                 case ETargetType.Enemy:
-                    var enemies = BattleManager.Instance.EnemyUnits;
+                    var enemies = BattleManager.Instance.GetTeam(instigator.m_isPlayerTeam, true);
                     switch (targetRange)
                     {
                         case ETargetRange.None:
@@ -46,7 +46,7 @@ namespace AbilitySystem
                     }
                     break;
                 case ETargetType.Ally:
-                    var allies = BattleManager.Instance.PlayerUnits;
+                    var allies = BattleManager.Instance.GetTeam(instigator.m_isPlayerTeam);
                     switch (targetRange)
                     {
                         case ETargetRange.None:
@@ -65,10 +65,10 @@ namespace AbilitySystem
                     }
                     break;
                 case ETargetType.AllEnemies:
-                    returnList.AddRange(BattleManager.Instance.EnemyUnits);
+                    returnList.AddRange(BattleManager.Instance.GetTeam(instigator.m_isPlayerTeam, true));
                     break;
                 case ETargetType.AllAllies:
-                    returnList.AddRange(BattleManager.Instance.PlayerUnits);
+                    returnList.AddRange(BattleManager.Instance.GetTeam(instigator.m_isPlayerTeam));
                     break;
                 case ETargetType.Count:
                     break;

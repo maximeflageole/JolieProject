@@ -3,6 +3,8 @@ using AbilitySystem;
 
 public class AutoBattlerUnit : MonoBehaviour
 {
+    public bool m_isPlayerTeam;
+
     [SerializeField]
     protected ChargeBar m_attackBar;
     [SerializeField]
