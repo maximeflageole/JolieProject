@@ -8,29 +8,20 @@ public class BattleManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
-
-        foreach (var unit in PlayerUnits)
-        {
-            unit.m_isPlayerTeam = true;
-        }
-        foreach (var unit in EnemyUnits)
-        {
-            unit.m_isPlayerTeam = false;
-        }
     }
 
     [field:SerializeField]
-    public List<AutoBattlerUnit> PlayerUnits { get; private set; }
+    public TeamComponent PlayerTeam { get; private set; }
     [field: SerializeField]
-    public List<AutoBattlerUnit> EnemyUnits { get; private set; }
+    public TeamComponent EnemyTeam { get; private set; }
 
     public List<AutoBattlerUnit> GetTeam(bool isPlayerTeam, bool adverseTeam = false)
     {
         if (isPlayerTeam && adverseTeam || !isPlayerTeam && !adverseTeam)
         {
-            return EnemyUnits;
+            return EnemyTeam.TeamUnits;
         }
 
-        return PlayerUnits;
+        return PlayerTeam.TeamUnits;
     }
 }
