@@ -8,12 +8,16 @@ public class AutoBattlerUnit : MonoBehaviour
     [SerializeField]
     protected ChargeBar m_attackBar;
     [SerializeField]
+    protected ChargeBar m_abilityBar;
+    [SerializeField]
     protected ChargeBar m_lifeBar;
     [SerializeField]
     protected UnitData m_unitData;
 
     protected float m_currentHealth;
     protected float m_currentAttackTime = 0f;
+    protected float m_currentAbilityTime = 0f;
+
 
     private void Start()
     {
@@ -23,17 +27,26 @@ public class AutoBattlerUnit : MonoBehaviour
     void Update()
     {
         m_currentAttackTime += Time.deltaTime;
+        m_currentAbilityTime += Time.deltaTime;
+
         if (m_currentAttackTime > m_unitData.m_attackSpeed)
         {
             m_currentAttackTime %= m_unitData.m_attackSpeed;
             PerformAutoAttack();
         }
+        if (m_currentAbilityTime > m_unitData.m_abilityData.AbilityCooldown)
+        {
+            m_currentAbilityTime %= m_unitData.m_abilityData.AbilityCooldown;
+            PerformAbility();
+        }
+
         UpdateUI();
     }
 
     private void UpdateUI()
     {
         m_attackBar?.UpdateBar(m_currentAttackTime / m_unitData.m_attackSpeed);
+        m_abilityBar?.UpdateBar(m_currentAbilityTime / m_unitData.m_abilityData.AbilityCooldown);
         m_lifeBar?.UpdateBar((float)m_currentHealth / m_unitData.m_health);
     }
 

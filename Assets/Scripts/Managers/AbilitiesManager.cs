@@ -7,6 +7,7 @@ namespace AbilitySystem
     {
         public static void SolveAutoAttack(AutoBattlerUnit instigator, float damage)
         {
+            //TODO: Now I am always targeting in melee range. Introduce other ranges
             var target = BattleManager.Instance.GetFrontEnemy(instigator.m_isPlayerTeam);
             target.ReceiveDamage(damage);
         }

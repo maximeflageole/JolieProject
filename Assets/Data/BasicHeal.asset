@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73bc3067087a26e48a1251b3b15699f6, type: 3}
-  m_Name: TestUnit
+  m_Script: {fileID: 11500000, guid: 940f797ea87b4f24496d91ad70c97e11, type: 3}
+  m_Name: BasicHeal
   m_EditorClassIdentifier: 
-  m_health: 100
-  m_attackDamage: 10
-  m_attackSpeed: 5
-  m_attackType: 0
-  m_abilityCooldown: 10
-  m_abilityData: {fileID: 11400000, guid: e42f748b25f339d41b0240356e32a377, type: 2}
+  AbilityCooldown: 2
+  AbilityEffects:
+  - TargetType: 1
+    TargetRange: 0
+    AbilityEffectType: 1
+    Magnitude: 6
