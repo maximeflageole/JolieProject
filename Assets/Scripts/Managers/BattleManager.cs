@@ -66,4 +66,24 @@ public class BattleManager : MonoBehaviour
         //If no unit at the mirrored index, get the unit that is at the end
         return team[team.Count - 1];
     }
+
+    public void OnUnitDeath(AutoBattlerUnit unit)
+    {
+        TeamComponent team = null;
+        if (unit.m_isPlayerTeam)
+        {
+            team = PlayerTeam;
+        }
+        else
+        {
+            team = EnemyTeam;
+        }
+
+        var unitPos = unit.m_positionIndex;
+        for (var i = unitPos + 1; i < 5; i++)
+        {
+            if (team.TeamUnits[i] != null)
+                team.ChangeUnitPosition(team.TeamUnits[i], i - 1);
+        }
+    }
 }

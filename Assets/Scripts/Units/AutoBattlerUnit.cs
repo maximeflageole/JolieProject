@@ -65,11 +65,20 @@ public class AutoBattlerUnit : MonoBehaviour
     {
         m_currentHealth -= magnitude;
         m_currentHealth = Mathf.Clamp(m_currentHealth, 0, UnitData.Health);
+        if (m_currentHealth <= float.Epsilon)
+            Die();
     }
 
     public void HealDamage(int magnitude)
     {
         m_currentHealth += magnitude;
         m_currentHealth = Mathf.Clamp(m_currentHealth, 0, UnitData.Health);
+    }
+
+    private void Die()
+    {
+        BattleManager.Instance.OnUnitDeath(this);
+        //TODO: Do not disappear this brutally
+        Destroy(gameObject);
     }
 }

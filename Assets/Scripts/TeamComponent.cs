@@ -28,4 +28,14 @@ public class TeamComponent : MonoBehaviour
             i++;
         }
     }
+
+    public void ChangeUnitPosition(AutoBattlerUnit unit, int index)
+    {
+        TeamUnits[index] = unit;
+        TeamUnits[index + 1] = null;
+        unit.m_positionIndex = index;
+        unit.transform.SetParent(m_unitSlots[index]);
+        //TODO: Temporary teleport to the correct position. Slide there smoothly
+        unit.transform.localPosition = new Vector3(0, 0, 0);
+    }
 }

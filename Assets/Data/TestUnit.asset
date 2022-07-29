@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestUnit
   m_EditorClassIdentifier: 
   Health: 100
-  AttackDamage: 10
-  AttackSpeed: 5
+  AttackDamage: 15
+  AttackSpeed: 3
   AttackType: 0
   AbilityData: {fileID: 11400000, guid: e42f748b25f339d41b0240356e32a377, type: 2}
