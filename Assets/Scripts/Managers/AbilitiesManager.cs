@@ -7,8 +7,19 @@ namespace AbilitySystem
     {
         public static void SolveAutoAttack(AutoBattlerUnit instigator, float damage)
         {
+            AutoBattlerUnit target = null;
             //TODO: Now I am always targeting in melee range. Introduce other ranges
-            var target = BattleManager.Instance.GetFrontEnemy(instigator.m_isPlayerTeam);
+            switch (instigator.UnitData.AttackType)
+            {
+                case EAttackType.Melee:
+                    target = BattleManager.Instance.GetFrontEnemy(instigator.m_isPlayerTeam);
+                    break;
+                case EAttackType.RangedMirror:
+                    target = BattleManager.Instance.GetMirroredEnemy(instigator.m_isPlayerTeam, instigator.m_positionIndex);
+                    break;
+                case EAttackType.Default:
+                    break;
+            }
             target.ReceiveDamage(damage);
         }
 

@@ -261,10 +261,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_isPlayerTeam: 0
+  m_positionIndex: 0
   m_attackBar: {fileID: 1402171499710380958}
   m_abilityBar: {fileID: 1053820399371808025}
   m_lifeBar: {fileID: 689729105082673557}
-  m_unitData: {fileID: 11400000, guid: bf1c6d15a7c2a35428e6fe50b90237a0, type: 2}
+  <UnitData>k__BackingField: {fileID: 11400000, guid: bf1c6d15a7c2a35428e6fe50b90237a0, type: 2}
 --- !u!1 &1402171499710380954
 GameObject:
   m_ObjectHideFlags: 0

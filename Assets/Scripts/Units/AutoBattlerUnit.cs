@@ -4,6 +4,7 @@ using AbilitySystem;
 public class AutoBattlerUnit : MonoBehaviour
 {
     public bool m_isPlayerTeam;
+    public int m_positionIndex;
 
     [SerializeField]
     protected ChargeBar m_attackBar;
@@ -11,8 +12,8 @@ public class AutoBattlerUnit : MonoBehaviour
     protected ChargeBar m_abilityBar;
     [SerializeField]
     protected ChargeBar m_lifeBar;
-    [SerializeField]
-    protected UnitData m_unitData;
+    [field:SerializeField]
+    public UnitData UnitData { get; protected set; }
 
     protected float m_currentHealth;
     protected float m_currentAttackTime = 0f;
@@ -21,7 +22,7 @@ public class AutoBattlerUnit : MonoBehaviour
 
     private void Start()
     {
-        m_currentHealth = m_unitData.m_health;
+        m_currentHealth = UnitData.Health;
     }
 
     void Update()
@@ -29,14 +30,14 @@ public class AutoBattlerUnit : MonoBehaviour
         m_currentAttackTime += Time.deltaTime;
         m_currentAbilityTime += Time.deltaTime;
 
-        if (m_currentAttackTime > m_unitData.m_attackSpeed)
+        if (m_currentAttackTime > UnitData.AttackSpeed)
         {
-            m_currentAttackTime %= m_unitData.m_attackSpeed;
+            m_currentAttackTime %= UnitData.AttackSpeed;
             PerformAutoAttack();
         }
-        if (m_currentAbilityTime > m_unitData.m_abilityData.AbilityCooldown)
+        if (m_currentAbilityTime > UnitData.AbilityData.AbilityCooldown)
         {
-            m_currentAbilityTime %= m_unitData.m_abilityData.AbilityCooldown;
+            m_currentAbilityTime %= UnitData.AbilityData.AbilityCooldown;
             PerformAbility();
         }
 
@@ -45,30 +46,30 @@ public class AutoBattlerUnit : MonoBehaviour
 
     private void UpdateUI()
     {
-        m_attackBar?.UpdateBar(m_currentAttackTime / m_unitData.m_attackSpeed);
-        m_abilityBar?.UpdateBar(m_currentAbilityTime / m_unitData.m_abilityData.AbilityCooldown);
-        m_lifeBar?.UpdateBar((float)m_currentHealth / m_unitData.m_health);
+        m_attackBar?.UpdateBar(m_currentAttackTime / UnitData.AttackSpeed);
+        m_abilityBar?.UpdateBar(m_currentAbilityTime / UnitData.AbilityData.AbilityCooldown);
+        m_lifeBar?.UpdateBar((float)m_currentHealth / UnitData.Health);
     }
 
     private void PerformAutoAttack()
     {
-        AbilitiesManager.SolveAutoAttack(this, m_unitData.m_attackDamage);
+        AbilitiesManager.SolveAutoAttack(this, UnitData.AttackDamage);
     }
 
     private void PerformAbility()
     {
-        AbilitiesManager.SolveAbility(m_unitData.m_abilityData, this);
+        AbilitiesManager.SolveAbility(UnitData.AbilityData, this);
     }
 
     public void ReceiveDamage(float magnitude)
     {
         m_currentHealth -= magnitude;
-        m_currentHealth = Mathf.Clamp(m_currentHealth, 0, m_unitData.m_health);
+        m_currentHealth = Mathf.Clamp(m_currentHealth, 0, UnitData.Health);
     }
 
     public void HealDamage(int magnitude)
     {
         m_currentHealth += magnitude;
-        m_currentHealth = Mathf.Clamp(m_currentHealth, 0, m_unitData.m_health);
+        m_currentHealth = Mathf.Clamp(m_currentHealth, 0, UnitData.Health);
     }
 }

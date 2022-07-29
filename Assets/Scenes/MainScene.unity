@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -279,9 +279,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 276620786}
     m_Modifications:
     - target: {fileID: 1402171498978111480, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
+      propertyPath: m_unitData
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e076d6132f85134586274ee01752fb8, type: 2}
+    - target: {fileID: 1402171498978111480, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
       propertyPath: m_abilityData
       value: 
       objectReference: {fileID: 11400000, guid: 389efcad1229b9f4b9a10a420701ae03, type: 2}
+    - target: {fileID: 1402171498978111480, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
+      propertyPath: <UnitData>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e076d6132f85134586274ee01752fb8, type: 2}
     - target: {fileID: 1402171498978111481, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1037,6 +1045,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2001089866}
     m_Modifications:
+    - target: {fileID: 1402171498978111480, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
+      propertyPath: m_unitData
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e076d6132f85134586274ee01752fb8, type: 2}
+    - target: {fileID: 1402171498978111480, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
+      propertyPath: <UnitData>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e076d6132f85134586274ee01752fb8, type: 2}
     - target: {fileID: 1402171498978111481, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -4,16 +4,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "UnitData", menuName = "Unit")]
 public class UnitData : ScriptableObject
 {
-    public float m_health = 100.0f;
-    public float m_attackDamage = 10.0f;
-    public float m_attackSpeed = 5.0f;
-    public EAttackType m_attackType = EAttackType.Melee;
-    public AbilityData m_abilityData;
+    public float Health = 100.0f;
+    public float AttackDamage = 10.0f;
+    public float AttackSpeed = 5.0f;
+    public EAttackType AttackType = EAttackType.Melee;
+    public AbilityData AbilityData;
 }
 
 public enum EAttackType
 {
     Melee,
-    Ranged,
+    RangedMirror,
     Default
 }

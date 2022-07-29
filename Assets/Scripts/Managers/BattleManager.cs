@@ -8,6 +8,19 @@ public class BattleManager : MonoBehaviour
     private void Start()
     {
         Instance = this;
+
+        int index = 0;
+        foreach (var unit in PlayerTeam.TeamUnits)
+        {
+            unit.m_positionIndex = index;
+            index++;
+        }
+        index = 0;
+        foreach (var unit in EnemyTeam.TeamUnits)
+        {
+            unit.m_positionIndex = index;
+            index++;
+        }
     }
 
     [field:SerializeField]
@@ -32,5 +45,25 @@ public class BattleManager : MonoBehaviour
             return EnemyTeam.TeamUnits[0];
         }
         return PlayerTeam.TeamUnits[0];
+    }
+
+    public AutoBattlerUnit GetMirroredEnemy(bool isPlayerTeam, int positionIndex)
+    {
+        List<AutoBattlerUnit> team = null;
+
+        if (isPlayerTeam)
+        {
+            team = EnemyTeam.TeamUnits;
+        }
+        else
+        {
+            team = PlayerTeam.TeamUnits;
+        }
+
+        if (team.Count > positionIndex)
+            return team[positionIndex];
+
+        //If no unit at the mirrored index, get the unit that is at the end
+        return team[team.Count - 1];
     }
 }

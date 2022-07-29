@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73bc3067087a26e48a1251b3b15699f6, type: 3}
-  m_Name: TestUnit
+  m_Name: RangedUnit
   m_EditorClassIdentifier: 
-  Health: 100
-  AttackDamage: 10
-  AttackSpeed: 5
-  AttackType: 0
+  Health: 60
+  AttackDamage: 12
+  AttackSpeed: 3.5
+  AttackType: 1
   AbilityData: {fileID: 11400000, guid: e42f748b25f339d41b0240356e32a377, type: 2}
