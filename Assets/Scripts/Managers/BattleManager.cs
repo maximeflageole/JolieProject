@@ -24,4 +24,13 @@ public class BattleManager : MonoBehaviour
 
         return PlayerTeam.TeamUnits;
     }
+
+    public AutoBattlerUnit GetFrontEnemy(bool isPlayerTeam)
+    {
+        if (isPlayerTeam)
+        {
+            return EnemyTeam.TeamUnits[0];
+        }
+        return PlayerTeam.TeamUnits[0];
+    }
 }

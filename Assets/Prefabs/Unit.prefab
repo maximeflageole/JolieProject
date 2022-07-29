@@ -260,10 +260,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9a01fe7c1293f844afce77aa356561a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isPlayerTeam: 0
   m_attackBar: {fileID: 1402171499710380958}
   m_lifeBar: {fileID: 689729105082673557}
-  m_abilityData: {fileID: 11400000, guid: 98b2e27a433d4794da8c9e4125b92fbe, type: 2}
-  m_maxHealth: 20
+  m_unitData: {fileID: 11400000, guid: bf1c6d15a7c2a35428e6fe50b90237a0, type: 2}
 --- !u!1 &1402171499710380954
 GameObject:
   m_ObjectHideFlags: 0

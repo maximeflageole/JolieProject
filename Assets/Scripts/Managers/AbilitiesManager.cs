@@ -5,6 +5,12 @@ namespace AbilitySystem
 {
     public static class AbilitiesManager
     {
+        public static void SolveAutoAttack(AutoBattlerUnit instigator, float damage)
+        {
+            var target = BattleManager.Instance.GetFrontEnemy(instigator.m_isPlayerTeam);
+            target.ReceiveDamage(damage);
+        }
+
         public static void SolveAbility(AbilityData abilityData, AutoBattlerUnit instigator)
         {
             foreach (var effect in abilityData.AbilityEffects)
