@@ -1,5 +1,7 @@
 using UnityEngine;
 using AbilitySystem;
+using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 
 public class AutoBattlerUnit : MonoBehaviour
 {
@@ -15,14 +17,42 @@ public class AutoBattlerUnit : MonoBehaviour
     [field:SerializeField]
     public UnitData UnitData { get; protected set; }
 
+    [SerializeField]
+    protected MMFeedbacks m_attackFeedback; 
+
     protected float m_currentHealth;
     protected float m_currentAttackTime = 0f;
     protected float m_currentAbilityTime = 0f;
 
+    public List<float> AbilitiesExecutionTime;
+
+    private void Awake()
+    {
+        AbilitiesExecutionTime = new List<float>();
+
+        var cooldown = UnitData.AbilityData.AbilityCooldown;
+        var nextAttackTimer = cooldown;
+
+        for (int i = 0; i < 16; i++)
+        {
+            AbilitiesExecutionTime.Add(nextAttackTimer);
+            nextAttackTimer += cooldown;
+        }
+    }
 
     private void Start()
     {
         m_currentHealth = UnitData.Health;
+    }
+
+    public void SetTeam(bool playerTeam)
+    {
+        m_isPlayerTeam = playerTeam;
+
+        if (!playerTeam)
+        {
+            m_attackFeedback.FeedbacksIntensity = -1;
+        }
     }
 
     void Update()
@@ -53,11 +83,16 @@ public class AutoBattlerUnit : MonoBehaviour
 
     private void PerformAutoAttack()
     {
+        //TODO: Might remove the AA entirely. Should keep the targeting system it uses
         AbilitiesManager.SolveAutoAttack(this, UnitData.AttackDamage);
+        m_attackFeedback.PlayFeedbacks();
     }
 
     private void PerformAbility()
     {
+        AbilitiesExecutionTime.RemoveAt(0);
+        var value = AbilitiesExecutionTime[AbilitiesExecutionTime.Count - 1] + UnitData.AbilityData.AbilityCooldown;
+        AbilitiesExecutionTime.Add(value);
         AbilitiesManager.SolveAbility(UnitData.AbilityData, this);
     }
 

@@ -31,6 +31,7 @@ namespace AbilitySystem
 
                 SolveAbilityEffect(targets, effect);
             }
+            BattleManager.Instance.OnRefreshTurnOrder();
         }
 
         private static List<AutoBattlerUnit> GetEffectTargets(AutoBattlerUnit instigator, ETargetType targetType, ETargetRange targetRange)

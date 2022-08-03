@@ -17,3 +17,4 @@ MonoBehaviour:
   AttackSpeed: 3.5
   AttackType: 1
   AbilityData: {fileID: 11400000, guid: e42f748b25f339d41b0240356e32a377, type: 2}
+  Sprite: {fileID: 21300012, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}

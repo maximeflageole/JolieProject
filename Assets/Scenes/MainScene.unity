@@ -426,6 +426,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1229294168}
     m_Modifications:
+    - target: {fileID: 1402171498978111480, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
+      propertyPath: <UnitData>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: ca4d6d39214ce1244b20ff56207471c4, type: 2}
     - target: {fileID: 1402171498978111481, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -905,6 +909,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 250649342}
     m_Modifications:
+    - target: {fileID: 1402171498978111480, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
+      propertyPath: <UnitData>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: ca4d6d39214ce1244b20ff56207471c4, type: 2}
     - target: {fileID: 1402171498978111481, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -952,6 +960,14 @@ PrefabInstance:
     - target: {fileID: 1402171498978111483, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
       propertyPath: m_Name
       value: Unit
+      objectReference: {fileID: 0}
+    - target: {fileID: 3143258682012119798, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
+      propertyPath: Space
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3143258682012119798, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
+      propertyPath: AnimatePositionDuration
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
@@ -1225,6 +1241,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Unit
       objectReference: {fileID: 0}
+    - target: {fileID: 5715990429302071553, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
+      propertyPath: ScaleWiggleProperties.LimitedTimeLeft
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715990429302071553, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
+      propertyPath: ScaleWiggleProperties.LimitedTimeTotal
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715990429302071553, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
+      propertyPath: PositionWiggleProperties.LimitedTimeLeft
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715990429302071553, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
+      propertyPath: RotationWiggleProperties.LimitedTimeLeft
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715990429302071553, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
+      propertyPath: PositionWiggleProperties.LimitedTimeTotal
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5715990429302071553, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
+      propertyPath: RotationWiggleProperties.LimitedTimeTotal
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6492043590194878407, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
+      propertyPath: Active
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
 --- !u!4 &1627315281 stripped
@@ -1239,6 +1283,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1445321458}
     m_Modifications:
+    - target: {fileID: 919829425133905263, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
+      propertyPath: FeedbacksIntensity
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 1402171498978111480, guid: facbb8a3f38be5543bd947439ac4149f, type: 3}
       propertyPath: m_abilityData
       value: 
@@ -1448,6 +1496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78a3450f11fa440498dbfffe4d0bce2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <TurnOrderLayout>k__BackingField: {fileID: 0}
   <PlayerTeam>k__BackingField: {fileID: 1126242980}
   <EnemyTeam>k__BackingField: {fileID: 2109426213}
 --- !u!4 &2013026068

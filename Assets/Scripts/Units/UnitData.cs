@@ -9,6 +9,7 @@ public class UnitData : ScriptableObject
     public float AttackSpeed = 5.0f;
     public EAttackType AttackType = EAttackType.Melee;
     public AbilityData AbilityData;
+    public Sprite Sprite;
 }
 
 public enum EAttackType

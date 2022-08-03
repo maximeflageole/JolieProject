@@ -20,7 +20,7 @@ public class TeamComponent : MonoBehaviour
         foreach (var unit in GetComponentsInChildren<AutoBattlerUnit>())
         {
             TeamUnits.Add(unit);
-            unit.m_isPlayerTeam = m_isPlayerTeam;
+            unit.SetTeam(m_isPlayerTeam);
             var sign = 1;
             if (m_isPlayerTeam)
                 sign = -1;
