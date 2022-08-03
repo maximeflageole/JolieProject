@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 
 public class BattleManager : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class BattleManager : MonoBehaviour
 
     [field:SerializeField]
     public TurnOrderLayout TurnOrderLayout { get; private set; }
+    [SerializeField]
+    protected MMFeedbacks m_timeSlowFeedback;
     public List<TurnOrder> TurnsOrder { get; private set; } = new List<TurnOrder>();
 
     private void Start()
@@ -133,6 +136,12 @@ public class BattleManager : MonoBehaviour
             turnOrderSprites.Add(unit.Unit.UnitData.Sprite);
         }
         TurnOrderLayout.PopulateImages(turnOrderSprites);
+    }
+
+    public void OnUnitAttack()
+    {
+        m_timeSlowFeedback.StopFeedbacks(true);
+        m_timeSlowFeedback.PlayFeedbacks();
     }
 }
 

@@ -85,6 +85,7 @@ public class AutoBattlerUnit : MonoBehaviour
     {
         //TODO: Might remove the AA entirely. Should keep the targeting system it uses
         AbilitiesManager.SolveAutoAttack(this, UnitData.AttackDamage);
+        BattleManager.Instance.OnUnitAttack();
         m_attackFeedback.PlayFeedbacks();
     }
 

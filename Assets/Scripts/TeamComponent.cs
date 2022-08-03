@@ -8,7 +8,7 @@ public class TeamComponent : MonoBehaviour
     [SerializeField]
     private float m_unitDistance = 2.0f;
     [SerializeField]
-    private List<Transform> m_unitSlots = new List<Transform>();
+    private List<UnitSlot> m_unitSlots = new List<UnitSlot>();
     public List<AutoBattlerUnit> TeamUnits { get; private set; }
 
     // Start is called before the first frame update
@@ -17,14 +17,20 @@ public class TeamComponent : MonoBehaviour
         TeamUnits = new List<AutoBattlerUnit>();
 
         var i = 0;
-        foreach (var unit in GetComponentsInChildren<AutoBattlerUnit>())
+        var units = GetComponentsInChildren<AutoBattlerUnit>();
+
+        foreach (var unitSlot in m_unitSlots)
         {
-            TeamUnits.Add(unit);
-            unit.SetTeam(m_isPlayerTeam);
+            if (units.Length > i)
+            {
+                TeamUnits.Add(units[i]);
+                units[i].SetTeam(m_isPlayerTeam);
+            }
+
             var sign = 1;
             if (m_isPlayerTeam)
                 sign = -1;
-            m_unitSlots[i].Translate(sign * i * m_unitDistance, 0f, 0f);
+            unitSlot.transform.Translate(sign * i * m_unitDistance, 0f, 0f);
             i++;
         }
     }
@@ -34,7 +40,7 @@ public class TeamComponent : MonoBehaviour
         TeamUnits[index] = unit;
         TeamUnits[index + 1] = null;
         unit.m_positionIndex = index;
-        unit.transform.SetParent(m_unitSlots[index]);
+        unit.transform.SetParent(m_unitSlots[index].transform);
         //TODO: Temporary teleport to the correct position. Slide there smoothly
         unit.transform.localPosition = new Vector3(0, 0, 0);
     }
