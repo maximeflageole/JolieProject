@@ -8,11 +8,27 @@ public class ShopManager : MonoBehaviour
     protected List<UnitData> m_unitsPool = new List<UnitData>();
     protected List<UnitData> m_currentDraftedUnits = new List<UnitData>();
     [SerializeField]
-    protected List<Image> m_unitsImages = new List<Image>();
+    protected List<ShopItem> m_units = new List<ShopItem>();
+    [SerializeField]
+    public Hoverable m_hoveredObject = null;
+
+    public static ShopManager Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
 
     private void Start()
     {
-        RefreshShopUnits();
+        if (Instance == this)
+            RefreshShopUnits();
     }
 
     public void RefreshShopUnits()
@@ -25,7 +41,38 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Random number is " + rand);
             m_currentDraftedUnits.Add(m_unitsPool[rand]);
 
-            m_unitsImages[i].sprite = m_currentDraftedUnits[i].Sprite;
+            m_units[i].SetData(m_currentDraftedUnits[i]);
+        }
+    }
+
+    public void RegisterHoverableObjects(Hoverable hoverable)
+    {
+        hoverable.OnBeginHover += OnObjectHovered;
+        hoverable.OnEndHover += OnObjectHoveredStop;
+    }
+
+    private void OnObjectHovered(Hoverable hoverable)
+    {
+        m_hoveredObject = hoverable;
+        Debug.Log("Hovered an object");
+    }
+
+    private void OnObjectHoveredStop(Hoverable hoverable)
+    {
+        if (m_hoveredObject == hoverable)
+        {
+            m_hoveredObject = null;
+        }
+        Debug.Log("Stopped hovering an object");
+    }
+
+    public void OnShopItemReleased(ShopItem shopItem)
+    {
+        if (m_hoveredObject != null)
+        {
+            var UnitSlot = m_hoveredObject as UnitSlot;
+            shopItem.transform.parent = m_hoveredObject.transform;
+            UnitSlot.AddUnit(shopItem);
         }
     }
 }
