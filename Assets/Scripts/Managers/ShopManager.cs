@@ -66,13 +66,13 @@ public class ShopManager : MonoBehaviour
         Debug.Log("Stopped hovering an object");
     }
 
-    public void OnShopItemReleased(ShopItem shopItem)
+    public bool OnShopItemReleased(ShopItem shopItem)
     {
         if (m_hoveredObject != null)
         {
             var UnitSlot = m_hoveredObject as UnitSlot;
-            shopItem.transform.parent = m_hoveredObject.transform;
             UnitSlot.AddUnit(shopItem);
         }
+        return m_hoveredObject != null;
     }
 }

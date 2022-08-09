@@ -17,6 +17,7 @@ public class ShopItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     {
         UnitData = unitData;
         GetComponent<Image>().sprite = unitData.Sprite;
+        gameObject.SetActive(true);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -31,15 +32,14 @@ public class ShopItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        ShopManager.Instance.OnShopItemReleased(this);
+        if (ShopManager.Instance.OnShopItemReleased(this))
+            gameObject.SetActive(false);
 
-        Destroy(gameObject);
+        transform.localPosition = Vector3.zero;
     }
 
     private void SetDraggedPosition(PointerEventData data)
     {
-        var transform = data.pointerEnter.transform as RectTransform;
-
         var rt = GetComponent<RectTransform>();
         Vector3 globalMousePos;
         if (RectTransformUtility.ScreenPointToWorldPointInRectangle(m_draggingPlane, data.position, data.pressEventCamera, out globalMousePos))
