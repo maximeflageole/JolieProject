@@ -1,15 +1,17 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
+    protected int m_cashMoney = 10;
+    [SerializeField]
+    protected TextMeshProUGUI m_cashTmPro;
     [SerializeField]
     protected List<UnitData> m_unitsPool = new List<UnitData>();
     protected List<UnitData> m_currentDraftedUnits = new List<UnitData>();
     [SerializeField]
     protected List<ShopItem> m_units = new List<ShopItem>();
-    [SerializeField]
     public Hoverable m_hoveredObject = null;
 
     public static ShopManager Instance;
@@ -29,6 +31,7 @@ public class ShopManager : MonoBehaviour
     {
         if (Instance == this)
             RefreshShopUnits();
+        RefreshMoney();
     }
 
     public void RefreshShopUnits()
@@ -66,13 +69,34 @@ public class ShopManager : MonoBehaviour
         Debug.Log("Stopped hovering an object");
     }
 
-    public void OnShopItemReleased(ShopItem shopItem)
+    public bool OnShopItemReleased(ShopItem shopItem)
     {
         if (m_hoveredObject != null)
         {
+            if (!TryBuyUnit(shopItem))
+            {
+                return false;
+            }
             var UnitSlot = m_hoveredObject as UnitSlot;
-            shopItem.transform.parent = m_hoveredObject.transform;
             UnitSlot.AddUnit(shopItem);
+            return true;
         }
+        return false;
+    }
+
+    private bool TryBuyUnit(ShopItem shopItem)
+    {
+        if (m_cashMoney > 3)
+        {
+            m_cashMoney -= 3;
+            RefreshMoney();
+            return true;
+        }
+        return false;
+    }
+
+    private void RefreshMoney()
+    {
+        m_cashTmPro?.SetText("Amount of Moneys: " + m_cashMoney);
     }
 }
