@@ -55,7 +55,7 @@ public class AutoBattlerUnit : MonoBehaviour
         }
     }
 
-    void Update()
+    public void UpdateBattle()
     {
         m_currentAttackTime += Time.deltaTime;
         m_currentAbilityTime += Time.deltaTime;

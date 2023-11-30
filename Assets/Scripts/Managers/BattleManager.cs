@@ -1,16 +1,25 @@
-using UnityEngine;
-using System.Collections.Generic;
 using MoreMountains.Feedbacks;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
 
+    public bool InBattle { get; private set; } = true;
     [field:SerializeField]
     public TurnOrderLayout TurnOrderLayout { get; private set; }
     [SerializeField]
     protected MMFeedbacks m_timeSlowFeedback;
     public List<TurnOrder> TurnsOrder { get; private set; } = new List<TurnOrder>();
+    [SerializeField]
+    private TextMeshProUGUI m_battleResultTxt;
+
+    [field: SerializeField]
+    public TeamComponent PlayerTeam { get; private set; }
+    [field: SerializeField]
+    public TeamComponent EnemyTeam { get; private set; }
 
     private void Start()
     {
@@ -31,11 +40,6 @@ public class BattleManager : MonoBehaviour
 
         OnRefreshTurnOrder();
     }
-
-    [field:SerializeField]
-    public TeamComponent PlayerTeam { get; private set; }
-    [field: SerializeField]
-    public TeamComponent EnemyTeam { get; private set; }
 
     public List<AutoBattlerUnit> GetTeam(bool isPlayerTeam, bool adverseTeam = false)
     {
@@ -83,13 +87,7 @@ public class BattleManager : MonoBehaviour
         if (unit.m_isPlayerTeam)
             team = PlayerTeam;
 
-        var unitPos = unit.m_positionIndex;
-
-        for (var i = unitPos + 1; i < team.TeamUnits.Count; i++)
-        {
-            if (team.TeamUnits[i] != null)
-                team.ChangeUnitPosition(team.TeamUnits[i], i - 1);
-        }
+        team.OnUnitDeath(unit);
     }
 
     public void OnRefreshTurnOrder()
@@ -142,6 +140,18 @@ public class BattleManager : MonoBehaviour
     {
         m_timeSlowFeedback.StopFeedbacks(true);
         m_timeSlowFeedback.PlayFeedbacks();
+    }
+
+    public void OnBattleEnded(TeamComponent team)
+    {
+        InBattle = false;
+        m_battleResultTxt.gameObject.SetActive(true);
+        if (team == EnemyTeam)
+        {
+            m_battleResultTxt.text = "Victory!";
+            return;
+        }
+        m_battleResultTxt.text = "Defeat";
     }
 }
 

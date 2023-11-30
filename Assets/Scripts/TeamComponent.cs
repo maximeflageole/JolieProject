@@ -8,7 +8,7 @@ public class TeamComponent : MonoBehaviour
     [SerializeField]
     private float m_unitDistance = 2.0f;
     [SerializeField]
-    private List<UnitSlot> m_unitSlots = new List<UnitSlot>();
+    private List<Transform> m_unitSlots = new List<Transform>();
     public List<AutoBattlerUnit> TeamUnits { get; private set; }
 
     // Start is called before the first frame update
@@ -21,7 +21,7 @@ public class TeamComponent : MonoBehaviour
 
         foreach (var unitSlot in m_unitSlots)
         {
-            if (units.Length > i)
+            if (units.Length > i && units[i].enabled == true)
             {
                 TeamUnits.Add(units[i]);
                 units[i].SetTeam(m_isPlayerTeam);
@@ -35,13 +35,45 @@ public class TeamComponent : MonoBehaviour
         }
     }
 
+    protected void Update()
+    {
+        if (!BattleManager.Instance.InBattle) return;
+
+        foreach (var unit in TeamUnits)
+        {
+            unit.UpdateBattle();
+        }
+    }
+
+    private bool IsWiped()
+    {
+        return TeamUnits.Count == 0;
+    }
+
     public void ChangeUnitPosition(AutoBattlerUnit unit, int index)
     {
         TeamUnits[index] = unit;
-        TeamUnits[index + 1] = null;
         unit.m_positionIndex = index;
         unit.transform.SetParent(m_unitSlots[index].transform);
         //TODO: Temporary teleport to the correct position. Slide there smoothly
         unit.transform.localPosition = new Vector3(0, 0, 0);
+    }
+    public void OnUnitDeath(AutoBattlerUnit unit)
+    {
+        var unitPos = unit.m_positionIndex;
+        TeamUnits.RemoveAt(unitPos);
+
+        for (var i = unitPos; i < TeamUnits.Count; i++)
+        {
+            if (TeamUnits[i] != null)
+                ChangeUnitPosition(TeamUnits[i], i - 1);
+        }
+
+        Debug.Log("Team " + gameObject.name + " has lost a member. Current team size is now: " + TeamUnits.Count);
+
+        if (IsWiped())
+        {
+            BattleManager.Instance.OnBattleEnded(this);
+        }
     }
 }
